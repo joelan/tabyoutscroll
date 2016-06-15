@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/menu_settings"
+        android:title="sheze1"
+        android:orderInCategory="1"
+    />
+    <item
+        android:id="@+id/menu_about"
+        android:orderInCategory="2"
+        android:title="2"
+/>
+    <item
+        android:id="@+id/menu_quit"
+        android:orderInCategory="3"
+        android:title="sheze3"
+     />
+</menu>
