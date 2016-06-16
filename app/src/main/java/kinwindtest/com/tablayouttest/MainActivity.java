@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Find_tab_Adapter find_tab_Adapter;
     private TextView titletext;
     private CollapsingToolbarLayout collapsingToolbar;
+    private AppBarLayout appbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        toolbar.setTitle("tablayout");
+   
+        titletext.setVisibility(View.VISIBLE);
+
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+
+                if (Math.abs(i) == appbar.getTotalScrollRange()) {
+
+                    titletext.setVisibility(View.VISIBLE);
+                } else {
+                    titletext.setVisibility(View.GONE);
+                }
+
+
+            }
+        });
+
+
 
     }
 
@@ -61,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
        // toolbar.setSubtitle("tabyout");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
@@ -80,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
       //  setupCollapsingToolbar();
 
     }
+    
+    
+    
 
     public static void setRefreshToolbarEnable(CollapsingToolbarLayout collapsingToolbarLayout,
                                                boolean refreshToolbarEnable) {
@@ -100,26 +122,17 @@ public class MainActivity extends AppCompatActivity {
 
         collapsingToolbar.setTitleEnabled(false);
     }*/
+    
+    
+    
     private void initialize() {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabFindFragmenttitle = (TabLayout) findViewById(R.id.tab_FindFragment_title);
         vpFindFragmentpager = (ViewPager) findViewById(R.id.vp_FindFragment_pager);
-        AppBarLayout appbar=(AppBarLayout)findViewById(R.id.appbar);
+      appbar=(AppBarLayout)findViewById(R.id.appbar);
         titletext=(TextView)findViewById(R.id.titletext);
-        titletext.setVisibility(View.VISIBLE);
-
-        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-
-
-                titletext.setVisibility(View.VISIBLE);
-
-
-            }
-        });
-
+      
 
 
 
