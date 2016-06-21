@@ -20,7 +20,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  AppBarLayout.OnOffsetChangedListener {
 
     private Toolbar toolbar;
     private TabLayout tabFindFragmenttitle;
@@ -52,21 +52,17 @@ public class MainActivity extends AppCompatActivity {
    
         titletext.setVisibility(View.VISIBLE);
 
-        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-
-                if (Math.abs(i) == appbar.getTotalScrollRange()) {
-
-                    titletext.setVisibility(View.VISIBLE);
-                } else {
-                    titletext.setVisibility(View.GONE);
-                }
+        appbar.addOnOffsetChangedListener(this);
 
 
-            }
-        });
 
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        appbar.removeOnOffsetChangedListener(this);
 
 
     }
@@ -99,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
       //  setupCollapsingToolbar();
 
     }
-    
-    
+
+
     
 
     public static void setRefreshToolbarEnable(CollapsingToolbarLayout collapsingToolbarLayout,
@@ -130,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabFindFragmenttitle = (TabLayout) findViewById(R.id.tab_FindFragment_title);
         vpFindFragmentpager = (ViewPager) findViewById(R.id.vp_FindFragment_pager);
-      appbar=(AppBarLayout)findViewById(R.id.appbar);
+         appbar=(AppBarLayout)findViewById(R.id.appbar);
         titletext=(TextView)findViewById(R.id.titletext);
       
 
@@ -187,6 +183,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mainmenu, menu);
         return true;
+
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+        if (Math.abs(i) == appbar.getTotalScrollRange()) {
+
+            titletext.setVisibility(View.VISIBLE);
+        } else {
+            titletext.setVisibility(View.GONE);
+        }
 
     }
 }
